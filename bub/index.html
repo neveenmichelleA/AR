@@ -2,65 +2,70 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>3D AR Viewer</title>
+    <title>Bub 3D AR Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       body {
         margin: 0;
-        background: #fff;
+        background-color: #ffffff;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
+        overflow: hidden;
       }
 
       model-viewer {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
+        z-index: 0;
       }
 
-      #ar-button {
+      .ar-button {
         position: absolute;
-        top: 50%;
+        z-index: 1;
+        bottom: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 16px 28px;
-        background: black;
+        transform: translate(-50%, 50%);
+        background: linear-gradient(135deg, #c8aa63, #b6934f);
         color: white;
-        font-size: 16px;
+        font-size: 18px;
+        font-weight: 500;
         border: none;
-        border-radius: 12px;
+        border-radius: 40px;
+        padding: 16px 36px;
         cursor: pointer;
-        z-index: 10;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
       }
 
-      #ar-button:active {
-        transform: translate(-50%, -50%) scale(0.97);
+      .ar-button:hover {
+        background: linear-gradient(135deg, #b6934f, #a07f3e);
+        transform: translate(-50%, 50%) scale(1.05);
       }
     </style>
   </head>
-
   <body>
     <model-viewer
-      src="https://raw.githubusercontent.com/neveenmichelleA/AR/refs/heads/main/bub/bub.glb"
-      ios-src="https://raw.githubusercontent.com/neveenmichelleA/AR/refs/heads/main/bub/bub.usdz"
-      alt="bub 3D Model"
+      id="model"
+      src="https://raw.githubusercontent.com/neveenmichelleA/AR/refs/heads/main/Bub/bub.glb"
+      ios-src="https://raw.githubusercontent.com/neveenmichelleA/AR/refs/heads/main/Bub/bub.usdz"
+      alt="Bub 3D Model"
       ar
       ar-modes="webxr scene-viewer quick-look"
       camera-controls
       auto-rotate
-      shadow-intensity="1"
-      exposure="1"
-      ar-scale="fixed"
-      ar-placement="floor"
-      style="width:100%; height:100vh;"
-    >
-      <button slot="ar-button" id="ar-button">View in your space</button>
+      shadow-intensity="1">
     </model-viewer>
 
-    <script type="module"
-      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
-    </script>
-  </body>
-</html>
+    <button class="ar-button" id="custom-ar-button">View in your space</button>
 
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script>
+      const modelViewer = document.getElementById("model");
+      const customButton = document.getElementById("custom-ar-button");
+
+      customButton.addEventListe
